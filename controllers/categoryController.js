@@ -6,7 +6,13 @@ var router = express.Router();
 // =========== GET ROUTES ===========
 // TEST ROUTE --- comment out later
 router.get('/new', function(req, res) {
-  res.render('categories/new');
+  Models.User.findAll({}).then((results) => {
+    var users = {
+      users: results
+    };
+    res.render('categories/new', users);
+  });
+
 });
 
 
