@@ -6,7 +6,6 @@ $(document).ready(function() {
 
   function populateCats() {
     $.get("/quizzes/api/new", function(categories) {
-      console.log(categories);
       for (var i = 0; i < categories.length; i++) {
         let category = $('<option>').attr('val', categories[i].id).html(categories[i].name);
         $('.categories').append(category);
@@ -46,11 +45,6 @@ $(document).ready(function() {
     $(this).parent().remove();
   });
 
-  function submitQuiz() {
-    var quiz = {
-      user: newItemName.val().trim(),
-      chirp: newItemInput.val().trim(),
-    };
-  }
+
 
 });
