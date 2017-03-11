@@ -14,7 +14,6 @@ var quizController = require('./controllers/quizController');
 var categoryController = require('./controllers/categoryController');
 var authController = require('./controllers/authController');
 
-
 // Create app
 var app = express();
 var PORT = process.env.PORT || 3000;
@@ -42,7 +41,7 @@ app.use(function(req, res, next) {
   next(null, req, res);
 });
 app.use(express.static(path.join(process.cwd(), '/public')));
-app.use(bodyParser.urlencoded({ extended: false }));
+// app.use(bodyParser.urlencoded({ extended: false }));
 app.use(methodOverride('_method'));
 
 // Routers
@@ -52,7 +51,7 @@ app.use('/categories', categoryController);
 app.use('/auth', authController);
 
 // Create Server
-Models.sequelize.sync().then(function() {
+Models.sequelize.sync({ force: false }).then(function() {
   app.listen(PORT, function() {
     console.log(`Listening on PORT: ${PORT}`);
   });

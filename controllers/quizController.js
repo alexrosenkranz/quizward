@@ -10,7 +10,11 @@ router.get('/new', function(req, res) {
   res.render('quizzes/new');
 });
 
-
+router.get('/api/new', function(req, res) {
+  Models.Category.findAll({}).then((results) => {
+    res.json(results);
+  });
+});
 
 
 // =========== POST ROUTES ===========

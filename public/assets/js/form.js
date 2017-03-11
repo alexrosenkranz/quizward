@@ -1,15 +1,30 @@
 $(document).ready(function() {
 
-  console.log('loaded');
+  $('.new-quiz').on('click', 'button', function(e) {
+    e.preventDefault();
+  });
 
+  function populateCats() {
+    $.get("/quizzes/api/new", function(categories) {
+      console.log(categories);
+      for (var i = 0; i < categories.length; i++) {
+        let category = $('<option>').attr('val', categories[i].id).html(categories[i].name);
+        $('.categories').append(category);
+      }
+    });
+  }
+  populateCats();
 
   function newChoice() {
     let choiceContainer = $(this).parent().find('.choice-container');
-    let newChoiceHolder = $('<span>').addClass('added-choice');
-    let newChoice = $('<input>').attr('type', 'text').attr('placeholder', 'Choice').addClass('form-control');
+    let newChoice = $(this).parent().find('.copy-choice').clone();
+    newChoice.val('');
+
+    // let newChoiceHolder = $('<span>').addClass('added-choice');
+    // let newChoice = $('<input>').attr('type', 'text').attr('placeholder', 'Choice').addClass('form-control col-sm-9');
     let newChoiceRemove = $('<button>').addClass('btn btn-danger remove-choice').text('X');
-    newChoiceHolder.append(newChoice).append(newChoiceRemove);
-    choiceContainer.append(newChoiceHolder);
+    newChoice.append(newChoiceRemove);
+    choiceContainer.append(newChoice);
   }
 
   // Add choice to question
@@ -29,6 +44,13 @@ $(document).ready(function() {
 
   $(document).on('click', '.remove-question', function() {
     $(this).parent().remove();
-  })
+  });
+
+  function submitQuiz() {
+    var quiz = {
+      user: newItemName.val().trim(),
+      chirp: newItemInput.val().trim(),
+    };
+  }
 
 });

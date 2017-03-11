@@ -1,8 +1,9 @@
 var express = require('express');
 var bcrypt = require('bcryptjs');
 var Models = require('../Models');
-
+var bodyParser = require('body-parser');
 var router = express.Router();
+var jsonParse = bodyParser.urlencoded({ extended: false });
 
 
 // ========= START testing Routes =============
@@ -52,7 +53,7 @@ router.get('/signout', (req, res) => {
 
 // =========== POST ROUTES ===========
 // login in post
-router.post('/login', (req, res) => {
+router.post('/login', jsonParse, (req, res) => {
   Models.User.findOne({ where: { email: req.body.email } })
     .then((match) => {
       if (!match) {
@@ -87,7 +88,7 @@ router.post('/login', (req, res) => {
 });
 
 // Create User
-router.post('/create', (req, res) => {
+router.post('/create', jsonParse, (req, res) => {
   console.log(req.body);
   const errors = [];
 
