@@ -11,6 +11,30 @@ var upload = multer({ dest: 'public/assets/images/uploads/' });
 
 // =========== GET ROUTES ===========
 // TEST ROUTE --- comment out later
+router.get('/', function(req, res) {
+  Models.Category.findAll({}).then((results) => {
+    var categories = {
+      categories: results
+    };
+    res.render('categories/all', categories);
+  });
+
+});
+
+router.get('/:id', function(req, res) {
+  let catId = req.params.id;
+  console.log('Page id: ' + catId);
+  Models.Category.findOne({ where: { id: catId } }).then((results) => {
+    var category = {
+      category: results
+    };
+    res.render('categories/single', category);
+  });
+
+});
+
+
+// Pass categories to new quiz select
 router.get('/new', function(req, res) {
   Models.User.findAll({}).then((results) => {
     var users = {
