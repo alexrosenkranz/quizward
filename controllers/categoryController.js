@@ -2,9 +2,11 @@ var express = require('express');
 var Models = require('../Models');
 var multer = require('multer');
 var router = express.Router();
+
 // var maxSize = 1 * 1000 * 1000;
 // limits: { fileSize: maxSize }
 var upload = multer({ dest: 'public/assets/images/uploads/' });
+
 // router.use(multer({ dest: './public/uploads/' }));
 
 // =========== GET ROUTES ===========
@@ -23,7 +25,8 @@ router.get('/new', function(req, res) {
 
 
 // =========== POST ROUTES ===========
-// Create User
+// Create Category
+
 router.post('/new', upload.single('image'), (req, res) => {
   Models.Category.create({
     name: req.body.name,
@@ -32,7 +35,6 @@ router.post('/new', upload.single('image'), (req, res) => {
   }).then(function() {
     res.redirect('/categories/new');
   })
-
 });
 
 

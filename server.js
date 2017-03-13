@@ -12,7 +12,8 @@ var Models = require('./models');
 var defaultController = require('./controllers/defaultController');
 var quizController = require('./controllers/quizController');
 var categoryController = require('./controllers/categoryController');
-var authController = require('./controllers/authController');
+var passport = require('./config/passport');
+var passController = require('./controllers/passController');
 
 // Create app
 var app = express();
@@ -30,6 +31,7 @@ app.use(session({
   saveUninitialized: true,
 }));
 app.use(cookieParser());
+
 // make session available;
 app.use(function(req, res, next) {
   res.locals.request = req;
@@ -40,6 +42,10 @@ app.use(function(req, res, next) {
   }
   next(null, req, res);
 });
+
+app.use(passport.initialize());
+app.use(passport.session());
+
 app.use(express.static(path.join(process.cwd(), '/public')));
 // app.use(bodyParser.urlencoded({ extended: false }));
 app.use(methodOverride('_method'));
@@ -48,7 +54,8 @@ app.use(methodOverride('_method'));
 app.use('/', defaultController);
 app.use('/quizzes', quizController);
 app.use('/categories', categoryController);
-app.use('/auth', authController);
+app.use('/auth', passController);
+
 
 // Create Server
 Models.sequelize.sync({ force: false }).then(function() {
