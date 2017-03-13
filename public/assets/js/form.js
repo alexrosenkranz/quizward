@@ -32,8 +32,8 @@ $(document).ready(function() {
   });
 
   $(document).on('click', '.add-question', function() {
-    let newQuestion = $('.q5').clone();
-    newQuestion.removeClass('q5').addClass('question');
+    let newQuestion = $('.q1').clone();
+    newQuestion.removeClass('q1').addClass('question');
     newQuestion.find('input').val('');
     newQuestion.find('textarea').val('');
     let newQuestionRemove = $('<button>').addClass('btn btn-danger remove-question').text('Remove Question');
@@ -66,25 +66,21 @@ $(document).ready(function() {
     $('.question').each(function() {
       let questionItem = {};
       questionItem.quiz_id = r.id;
-      questionItem.question = $('[name=question]').val();
-      questionItem.answer = $('[name=answer]').val();
-      questionItem.explanation = $('[name=explanation]').val();
+      questionItem.question = $(this).find('[name=question]').val();
+      questionItem.answer = $(this).find('[name=answer]').val();
+      questionItem.explanation = $(this).find('[name=explanation]').val();
       let questionChoices = [];
       $(this).find('.choice-container').find('input').each(function() {
         questionChoices.push($(this).val());
       })
-      questionItem.choices = questionChoices;
+      questionItem.choices = questionChoices.toString();
 
       questionList.push(questionItem);
     });
     fullQuestionList.questionList = questionList;
     console.log(fullQuestionList);
 
-    $.ajax({
-      method: 'POST',
-      url: '/quizzes/create/questions',
-      data: fullQuestionList
-    }).then(function(result) {
+    $.post('/quizzes/create/questions', fullQuestionList).then(function(result) {
       console.log(result);
     });
 
