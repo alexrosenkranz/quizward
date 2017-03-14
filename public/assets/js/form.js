@@ -1,9 +1,8 @@
 $(document).ready(function() {
+  // call our Cats
+  populateCats();
 
-  $('.new-quiz').on('click', 'button', function(e) {
-    e.preventDefault();
-  });
-
+  // Function to query categories for Quiz Cat select dropdown
   function populateCats() {
     $.get("/quizzes/api/new", function(categories) {
       for (var i = 0; i < categories.length; i++) {
@@ -12,8 +11,8 @@ $(document).ready(function() {
       }
     });
   }
-  populateCats();
 
+  // Function to Add Choice
   function newChoice() {
     var choiceContainer = $(this).parent().find('.choice-container');
     var newChoice = $(this).parent().find('.copy-choice').clone();
@@ -24,27 +23,7 @@ $(document).ready(function() {
     choiceContainer.append(newChoice);
   }
 
-  // Add choice to question
-  $(document).on('click', '.add-choice', newChoice);
-
-  $(document).on('click', '.remove-choice', function() {
-    $(this).parent().remove();
-  });
-
-  $(document).on('click', '.add-question', function() {
-    var newQuestion = $('.q1').clone();
-    newQuestion.removeClass('q1').addClass('question');
-    newQuestion.find('input').val('');
-    newQuestion.find('textarea').val('');
-    var newQuestionRemove = $('<button>').addClass('btn btn-danger remove-question').text('Remove Question');
-    newQuestion.append(newQuestionRemove);
-    $('.additional-questions').append(newQuestion);
-  });
-
-  $(document).on('click', '.remove-question', function() {
-    $(this).parent().remove();
-  });
-
+  // Make Quiz
   function createQuiz() {
     var newQuiz = {};
     newQuiz.name = $("[name=name]").val();
@@ -56,10 +35,12 @@ $(document).ready(function() {
       url: '/quizzes/create',
       data: newQuiz
     }).then(function(result) {
+      // Passes Quiz Id to Questions
       createQuestions(result);
     });
   }
 
+  // Make Questions 
   function createQuestions(r) {
     var fullQuestionList = {};
     var questionList = [];
@@ -83,14 +64,39 @@ $(document).ready(function() {
       url: '/quizzes/questions',
       data: JSON.stringify(fullQuestionList),
       contentType: "application/json",
-    }).then(function(result) {
-
-    });
-
-
+    }).then(function(result) {});
   }
 
+  // Prevent New Quiz from submitting form unless through AJAX
+  $('.new-quiz').on('click', 'button', function(e) {
+    e.preventDefault();
+  });
 
+  // Add choice to question
+  $(document).on('click', '.add-choice', newChoice);
+  // Remove Question
+  $(document).on('click', '.remove-choice', function() {
+    $(this).parent().remove();
+  });
+
+  // Add Question
+  $(document).on('click', '.add-question', function() {
+    var newQuestion = $('.q1').clone();
+    newQuestion.removeClass('q1').addClass('question');
+    newQuestion.find('input').val('');
+    newQuestion.find('textarea').val('');
+    var newQuestionRemove = $('<button>').addClass('btn btn-danger remove-question').text('Remove Question');
+    newQuestion.append(newQuestionRemove);
+    $('.additional-questions').append(newQuestion);
+  });
+
+  // Remove Question
+  $(document).on('click', '.remove-question', function() {
+    $(this).parent().remove();
+  });
+
+
+  // Create Quiz
   $('body').on('click', '.submit-quiz', function() {
     createQuiz();
   });
