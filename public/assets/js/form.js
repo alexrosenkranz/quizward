@@ -77,11 +77,16 @@ $(document).ready(function() {
       questionList.push(questionItem);
     });
     fullQuestionList.questionList = questionList;
-    console.log(fullQuestionList);
 
-    $.post('/quizzes/create/questions', fullQuestionList).then(function(result) {
-      console.log(result);
+    $.ajax({
+      method: 'POST',
+      url: '/quizzes/questions',
+      data: JSON.stringify(fullQuestionList),
+      contentType: "application/json",
+    }).then(function(result) {
+
     });
+
 
   }
 

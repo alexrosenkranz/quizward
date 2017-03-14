@@ -68,7 +68,7 @@ router.post('/create', upload.single('image'), (req, res) => {
     image: imageName,
     category_id: req.body.category
   }).then(function() {
-    res.redirect('/categories/');
+    res.redirect('/categories');
   })
 });
 

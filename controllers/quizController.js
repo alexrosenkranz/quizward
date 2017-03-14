@@ -2,9 +2,9 @@ var express = require('express');
 var Models = require('../Models');
 var bodyParser = require('body-parser');
 // Create Router Object & middleware
+var jsonParse = bodyParser.json();
 var router = express.Router();
-var jsonParse = bodyParser.urlencoded({ extended: false });
-router.use(jsonParse);
+
 
 // =========== GET ROUTES ===========
 // TEST ROUTE --- comment out later
@@ -42,7 +42,25 @@ router.get('/:id', function(req, res) {
 
 // =========== POST ROUTES ===========
 // Create Quiz
-router.post('/create', (req, res) => {
+
+router.post('/questions', jsonParse, (req, res) => {
+  console.log(req.body);
+
+  for (var i = 0; i < req.body.questionList.length; i++) {
+    Models.Question.create({
+      quiz_id: req.body.questionList[i].quiz_id,
+      question: req.body.questionList[i].question,
+      correct_answer: req.body.questionList[i].answer,
+      choice: req.body.questionList[i].choices,
+      explanation: req.body.questionList[i].explanation
+    }).then(function(q) {
+
+    });
+  }
+});
+
+
+router.post('/create', jsonParse, (req, res) => {
   console.log(req.body);
   Models.Quiz.create({
     name: req.body.name,
@@ -53,22 +71,6 @@ router.post('/create', (req, res) => {
   });
 });
 
-router.post('/create/questions', jsonParse, (req, res) => {
-  console.log(req.body);
-  res.json(req.body);
-
-  for (var i = 0; i < req.body.questionList.length; i++) {
-    Models.Question.create({
-      quiz_id: req.body.questionList[i].quiz_id,
-      question: req.body.questionList[i].question,
-      correct_answer: req.body.questionList[i].answer,
-      choice: req.body.questionList[i].choices,
-      explanation: req.body.questionList[i].explanation
-    }).then(function(q) {
-      res.json(q);
-    });
-  }
-});
 
 
 module.exports = router;
