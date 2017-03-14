@@ -40,7 +40,7 @@ router.get('/new', function(req, res) {
 });
 
 router.get('/:id', function(req, res) {
-  let catId = req.params.id;
+  var catId = req.params.id;
   Models.Category.findOne({ where: { id: catId } }).then((results) => {
     var category = {
       category: results
@@ -56,7 +56,7 @@ router.get('/:id', function(req, res) {
 // Create Category
 
 router.post('/create', upload.single('image'), (req, res) => {
-  let imageName;
+  var imageName;
   if (!req.file) {
     imageName = "cat_default.jpg";
   } else {

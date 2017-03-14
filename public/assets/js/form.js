@@ -7,7 +7,7 @@ $(document).ready(function() {
   function populateCats() {
     $.get("/quizzes/api/new", function(categories) {
       for (var i = 0; i < categories.length; i++) {
-        let category = $('<option>').attr('category-id', categories[i].id).html(categories[i].name);
+        var category = $('<option>').attr('category-id', categories[i].id).html(categories[i].name);
         $('.quiz-categories').append(category);
       }
     });
@@ -15,11 +15,11 @@ $(document).ready(function() {
   populateCats();
 
   function newChoice() {
-    let choiceContainer = $(this).parent().find('.choice-container');
-    let newChoice = $(this).parent().find('.copy-choice').clone();
+    var choiceContainer = $(this).parent().find('.choice-container');
+    var newChoice = $(this).parent().find('.copy-choice').clone();
     newChoice.removeClass('copy-choice');
     newChoice.find('input').val('');
-    let newChoiceRemove = $('<button>').addClass('btn btn-danger remove-choice').text('X');
+    var newChoiceRemove = $('<button>').addClass('btn btn-danger remove-choice').text('X');
     newChoice.append(newChoiceRemove);
     choiceContainer.append(newChoice);
   }
@@ -32,11 +32,11 @@ $(document).ready(function() {
   });
 
   $(document).on('click', '.add-question', function() {
-    let newQuestion = $('.q1').clone();
+    var newQuestion = $('.q1').clone();
     newQuestion.removeClass('q1').addClass('question');
     newQuestion.find('input').val('');
     newQuestion.find('textarea').val('');
-    let newQuestionRemove = $('<button>').addClass('btn btn-danger remove-question').text('Remove Question');
+    var newQuestionRemove = $('<button>').addClass('btn btn-danger remove-question').text('Remove Question');
     newQuestion.append(newQuestionRemove);
     $('.additional-questions').append(newQuestion);
   });
@@ -46,7 +46,7 @@ $(document).ready(function() {
   });
 
   function createQuiz() {
-    let newQuiz = {};
+    var newQuiz = {};
     newQuiz.name = $("[name=name]").val();
     newQuiz.category = parseInt($('.quiz-categories option:selected').attr('category-id'));
     newQuiz.description = $('.quiz-description').val();
@@ -61,15 +61,15 @@ $(document).ready(function() {
   }
 
   function createQuestions(r) {
-    let fullQuestionList = {};
-    let questionList = [];
+    var fullQuestionList = {};
+    var questionList = [];
     $('.question').each(function() {
-      let questionItem = {};
+      var questionItem = {};
       questionItem.quiz_id = r.id;
       questionItem.question = $(this).find('[name=question]').val();
       questionItem.answer = $(this).find('[name=answer]').val();
       questionItem.explanation = $(this).find('[name=explanation]').val();
-      let questionChoices = [];
+      var questionChoices = [];
       $(this).find('.choice-container').find('input').each(function() {
         questionChoices.push($(this).val());
       })

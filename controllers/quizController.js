@@ -28,7 +28,7 @@ router.get('/api/new', function(req, res) {
 });
 
 router.get('/:id', function(req, res) {
-  let quizId = req.params.id;
+  var quizId = req.params.id;
 
   Models.Quiz.findById(quizId).then((results) => {
     var quiz = {
