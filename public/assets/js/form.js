@@ -26,10 +26,13 @@ $(document).ready(function() {
   // Make Quiz
   function createQuiz() {
     var newQuiz = {};
+    newQuiz.category = []
     newQuiz.name = $("[name=name]").val();
-    newQuiz.category = parseInt($('.quiz-categories option:selected').attr('category-id'));
+    $('.quiz-categories option:selected').each(function() {
+      newQuiz.category.push(parseInt($(this).attr('category-id')));
+    });
     newQuiz.description = $('.quiz-description').val();
-
+    newQuiz.category = JSON.stringify(newQuiz.category);
     $.ajax({
       method: 'POST',
       url: '/quizzes/create',
@@ -54,7 +57,7 @@ $(document).ready(function() {
       $(this).find('.choice-container').find('input').each(function() {
         questionChoices.push($(this).val());
       })
-      questionItem.choices = questionChoices.toString();
+      questionItem.choices = JSON.stringify(questionChoices);
       questionList.push(questionItem);
     });
     fullQuestionList.questionList = questionList;
