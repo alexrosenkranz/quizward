@@ -56,13 +56,19 @@ router.get('/:id', function(req, res) {
 // Create Category
 
 router.post('/create', upload.single('image'), (req, res) => {
+  let imageName;
+  if (!req.file) {
+    imageName = "cat_default.jpg";
+  } else {
+    imageName = req.file.originalname;
+  }
   Models.Category.create({
     name: req.body.name,
     description: req.body.description,
-    image: req.file.originalname,
+    image: imageName,
     category_id: req.body.category
   }).then(function() {
-    res.redirect('/categories/new');
+    res.redirect('/categories/');
   })
 });
 
