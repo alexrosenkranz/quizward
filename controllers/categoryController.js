@@ -63,7 +63,8 @@ router.post('/create', upload.single('image'), (req, res) => {
   Models.Category.create({
     name: req.body.name,
     description: req.body.description,
-    image: req.file.originalname
+    image: req.file.originalname,
+    category_id: req.body.category
   }).then(function() {
     res.redirect('/categories/new');
   })

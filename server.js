@@ -58,7 +58,7 @@ app.use('/auth', passController);
 
 
 // Create Server
-Models.sequelize.sync({ force: true }).then(function() {
+Models.sequelize.sync({ force: false }).then(function() {
   app.listen(PORT, function() {
     console.log(`Listening on PORT: ${PORT}`);
   });

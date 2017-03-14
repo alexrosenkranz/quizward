@@ -8,6 +8,15 @@ var jsonParse = bodyParser.urlencoded({ extended: true });
 
 // =========== GET ROUTES ===========
 // TEST ROUTE --- comment out later
+router.get('/', function(req, res) {
+  Models.Quiz.findAll({}).then((results) => {
+    var quizzes = {
+      quizzes: results
+    };
+    res.render('quizzes/all', quizzes);
+  });
+});
+
 router.get('/new', function(req, res) {
   res.render('quizzes/new');
 });
@@ -15,6 +24,18 @@ router.get('/new', function(req, res) {
 router.get('/api/new', function(req, res) {
   Models.Category.findAll({}).then((results) => {
     res.json(results);
+  });
+});
+
+router.get('/:id', function(req, res) {
+  let quizId = req.params.id;
+
+  Models.Quiz.findById(quizId).then((results) => {
+    var quiz = {
+      quiz: results
+    };
+    res.json(quiz);
+    // res.render('quizzes/single', quiz);
   });
 });
 
