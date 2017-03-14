@@ -52,10 +52,6 @@ router.get('/:id', function(req, res) {
 
 
 
-
-
-
-
 // =========== POST ROUTES ===========
 // Create Category
 

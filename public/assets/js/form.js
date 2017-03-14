@@ -74,7 +74,6 @@ $(document).ready(function() {
         questionChoices.push($(this).val());
       })
       questionItem.choices = questionChoices.toString();
-
       questionList.push(questionItem);
     });
     fullQuestionList.questionList = questionList;

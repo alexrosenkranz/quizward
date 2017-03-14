@@ -2,8 +2,11 @@ var express = require('express');
 var bcrypt = require('bcryptjs');
 var Models = require('../Models');
 var bodyParser = require('body-parser');
+
+// Create Router Object & middleware
 var router = express.Router();
 var jsonParse = bodyParser.urlencoded({ extended: false });
+router.use(jsonParse);
 
 // lib
 var passport = require('../config/passport');
@@ -45,7 +48,7 @@ router.get('/signout', function(req, res) {
 
 
 // =========== POST ROUTES ===========
-router.post('/login', jsonParse, passport.authenticate('local'), function(req, res) {
+router.post('/login', passport.authenticate('local'), function(req, res) {
   res.json({ url: '/auth' });
 });
 

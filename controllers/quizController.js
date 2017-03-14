@@ -1,10 +1,10 @@
 var express = require('express');
 var Models = require('../Models');
 var bodyParser = require('body-parser');
+// Create Router Object & middleware
 var router = express.Router();
-var jsonParse = bodyParser.urlencoded({ extended: true });
-
-
+var jsonParse = bodyParser.urlencoded({ extended: false });
+router.use(jsonParse);
 
 // =========== GET ROUTES ===========
 // TEST ROUTE --- comment out later
@@ -42,7 +42,7 @@ router.get('/:id', function(req, res) {
 
 // =========== POST ROUTES ===========
 // Create Quiz
-router.post('/create', jsonParse, (req, res) => {
+router.post('/create', (req, res) => {
   console.log(req.body);
   Models.Quiz.create({
     name: req.body.name,
@@ -68,9 +68,7 @@ router.post('/create/questions', jsonParse, (req, res) => {
       res.json(q);
     });
   }
-
 });
-
 
 
 module.exports = router;
