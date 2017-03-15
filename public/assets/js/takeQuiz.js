@@ -6,12 +6,13 @@ $(document).ready(function() {
     return;
   }
   getQuiz();
+  var quizId;
 
   function getQuiz() {
-    var quizId = parseInt($('form').attr('quiz-id'));
+    quizId = parseInt($('form').attr('quiz-id'));
+
     $.get('/api/quiz/' + quizId + '/questions', function(quiz) {
       printQuiz(quiz);
-
     });
   }
 
@@ -44,7 +45,16 @@ $(document).ready(function() {
     $('.take-quiz').find('.form-group').each(function() {
       choicesPicked.push($(this).find('input[type=radio]:checked').val());
     });
-    console.log(choicesPicked);
+    var quizResults = {
+      user_answers: choicesPicked,
+      user_id: req.user ? req.user.id : "-1",
+      quiz_id: quizId
+    }
+    console.log(quizResults);
+
+    $.post('/api/userquiz', quizResults).then(function(results) {
+      console.log(results);
+    });
   });
 
 });
