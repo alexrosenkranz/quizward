@@ -1,5 +1,9 @@
 <div class="list-group">
   {{#each quizzes}}
-  <a class="list-group-item" href="/quizzes/{{id}}">{{name}}</a>
+  <a class="list-group-item" href="/quizzes/{{id}}">
+  <h4 class="list-group-item-heading">{{name}}</h4>
+  <p class="list-group-item-text">{{description}}</p>
+  <small>Made By: {{Users.0.username}}</small>
+  </a>
   {{/each}}
 </div>

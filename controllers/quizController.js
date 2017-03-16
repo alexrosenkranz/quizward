@@ -9,10 +9,16 @@ var router = express.Router();
 // =========== GET ROUTES ===========
 // TEST ROUTE --- comment out later
 router.get('/', function(req, res) {
-  Models.Quiz.findAll({}).then((results) => {
+  Models.Quiz.findAll({
+    include: [{
+      model: Models.User,
+      through: Models.UserQuiz,
+    }],
+  }).then((results) => {
     var quizzes = {
       quizzes: results
     };
+    // res.json(quizzes);
     res.render('quizzes/all', quizzes);
   });
 });
