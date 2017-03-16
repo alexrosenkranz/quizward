@@ -41,12 +41,13 @@ $(document).ready(function() {
 
   $('.take-quiz').on('click', 'button', function(e) {
     e.preventDefault();
-    var choicesPicked = [];
+    var userAnswers = [];
     $('.take-quiz').find('.form-group').each(function() {
-      choicesPicked.push($(this).find('input[type=radio]:checked').val());
+      userAnswers.push($(this).find('input[type=radio]:checked').val());
     });
+
     var quizResults = {
-      user_answers: choicesPicked,
+      userAnswers: JSON.stringify(userAnswers),
       quiz_id: quizId
     }
     console.log(quizResults);
