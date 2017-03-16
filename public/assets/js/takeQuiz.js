@@ -49,7 +49,7 @@ $(document).ready(function() {
     $('.take-quiz').find('.form-group').each(function() {
       userAnswers.push($(this).find('input[type=radio]:checked').val());
     });
-
+    console.log(userAnswers);
     for (var i = 0; i < userAnswers.length; i++) {
       if (userAnswers[i] === quizAnswers[i]) {
         score++;
@@ -58,13 +58,16 @@ $(document).ready(function() {
     console.log(score);
 
     var quizResults = {
+      score: score,
+      quizAnswers: JSON.stringify(quizAnswers),
       userAnswers: JSON.stringify(userAnswers),
-      quiz_id: quizId
+      quiz_id: quizId,
+
     }
     console.log(quizResults);
 
     $.post('/api/userquiz', quizResults).then(function(results) {
-      console.log(results);
+      window.location.replace(results.url)
     });
   });
 
