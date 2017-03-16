@@ -151,6 +151,16 @@ router.get('/quiz/by-category/:category_id?', (req, res) => {
   })
 });
 
+router.post('/userquiz', (req, res) => {
+  Models.UserQuiz.create({
+    score: req.body.user_answers,
+    quiz_id: req.body.quiz_id,
+    user_id: req.user ? req.user.id : "-1"
+  }).then(function(result) {
+
+  });
+})
+
 // POST for quiz ----------------------//
 router.post('/quiz/new', (req, res) => {
   // helper functions - to insert data 

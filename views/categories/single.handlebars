@@ -13,3 +13,15 @@
 
   </div>
 </div>
+
+<h2>Quizzes that belong to this category.</h2>
+<div class="list-group">
+  {{#each category.Quizzes}}
+  <div class="col-xs-12 col-sm-6 col-md-6 quiz-background">
+  <a class="list-group-item quiz-info" href="/quizzes/{{id}}">
+    <h4 class="list-group-item-heading">{{name}}</h4>
+    <p class="list-group-item-text">{{description}}</p>
+  </a>
+  </div>
+  {{/each}}
+</div>

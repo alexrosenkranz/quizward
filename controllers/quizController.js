@@ -13,6 +13,9 @@ router.get('/', function(req, res) {
     include: [{
       model: Models.User,
       through: Models.UserQuiz,
+    }, {
+      model: Models.Category,
+      through: Models.QuizCategory,
     }],
   }).then((results) => {
     var quizzes = {

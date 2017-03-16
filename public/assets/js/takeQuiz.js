@@ -47,7 +47,6 @@ $(document).ready(function() {
     });
     var quizResults = {
       user_answers: choicesPicked,
-      user_id: req.user ? req.user.id : "-1",
       quiz_id: quizId
     }
     console.log(quizResults);
