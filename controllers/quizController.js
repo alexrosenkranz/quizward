@@ -52,8 +52,8 @@ router.get('/:id/results', function(req, res) {
     var quizResults = {
       quizResults: results
     };
-    res.json(quizResults);
-    // res.render('quizzes/results', quizResults);
+    // res.json(quizResults);
+    res.render('quizzes/results', quizResults);
   });
 
   // Models.Post.findAll({}).then((results) => {
