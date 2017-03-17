@@ -17,19 +17,6 @@ h6 {
   color: white;
 }
 
-.navbar-right>li>a {
-  font-family: 'Ubuntu', sans-serif;
-  color: white;
-  border-radius: 60px;
-  transition: all ease-in-out;
-  transition-duration: .25s;
-}
-
-.navbar-right>li>a:hover {
-  color: #3b3b3b;
-  background-color: rgba(255, 255, 255, 0.9);
-}
-
 .picDisplay {
   float: left;
   margin-right: 50px;
