@@ -98,7 +98,7 @@ router.post('/create', jsonParse, (req, res) => {
     description: req.body.description,
     category_id: req.body.category,
   }).then(function(q) {
-    res.json(q);
+    res.json({ url: "/quizzes/" });
   });
 });
 
