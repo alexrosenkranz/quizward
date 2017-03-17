@@ -1,6 +1,26 @@
 @import url('https://fonts.googleapis.com/css?family=Open+Sans:400,700,700i|Permanent+Marker');
 body {
   font-family: 'Open Sans', sans-serif;
+  background: rgba(8, 16, 102, 1);
+  background: -moz-linear-gradient(top, rgba(8, 16, 102, 1) 0%, rgba(48, 208, 208, 1) 100%);
+  background: -webkit-gradient(left top, left bottom, color-stop(0%, rgba(8, 16, 102, 1)), color-stop(100%, rgba(48, 208, 208, 1)));
+  background: -webkit-linear-gradient(top, rgba(8, 16, 102, 1) 0%, rgba(48, 208, 208, 1) 100%);
+  background: -o-linear-gradient(top, rgba(8, 16, 102, 1) 0%, rgba(48, 208, 208, 1) 100%);
+  background: -ms-linear-gradient(top, rgba(8, 16, 102, 1) 0%, rgba(48, 208, 208, 1) 100%);
+  background: linear-gradient(to bottom, rgba(8, 16, 102, 1) 0%, rgba(48, 208, 208, 1) 100%);
+  filter: progid: DXImageTransform.Microsoft.gradient( startColorstr='#081066', endColorstr='#30d0d0', GradientType=0);
+  background-attachment: fixed;
+}
+
+.jumbotron {
+  background: none;
+}
+
+.main-body {
+  background: rgba(255, 255, 255, 0.8);
+  border-radius: 12px;
+  margin-bottom: 75px;
+  padding: 20px 30px 30px 30px;
 }
 
 .logo-title {
@@ -12,6 +32,54 @@ ul.navbar-right a {
   font-weight: 700
 }
 
+.dropdown-menu {
+  background-color: rgba(255, 255, 255, 0.9);
+  -webkit-background-clip: padding-box;
+  background-clip: padding-box;
+  border: none;
+  border-radius: 15px;
+  -webkit-box-shadow: 0 6px 12px rgba(0, 0, 0, .175);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, .175);
+}
+
+.nav .open>a,
+.nav .open>a:focus,
+.nav .open>a:hover {
+  background-color: rgba(255, 255, 255, 0.9);
+  border-radius: 15px 15px 0 0;
+  border: none;
+  color: #3b3b3b
+}
+
+.navbar-nav>li>.dropdown-menu {
+  border-top-left-radius: 15px;
+  border-top-right-radius: 0;
+}
+
+.dropdown-menu>li>a:focus,
+.dropdown-menu>li>a:hover {
+  background: none;
+  transition: all ease-in-out;
+  transition-duration: .25s;
+}
+
 .category-image {
   max-width: 100%;
+}
+
+.page-header {
+  border-bottom: 2px dashed rgba(0, 0, 0, 0.7);
+}
+
+.footer {
+  font-size: 15px;
+  color: #fff;
+}
+
+.footer a {
+  color: #fff;
+}
+
+.footer a i {
+  font-size: 65px;
 }
