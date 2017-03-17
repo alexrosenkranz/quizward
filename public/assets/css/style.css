@@ -21,6 +21,11 @@ h6 {
   font-family: 'Ubuntu', sans-serif;
 }
 
+a:focus,
+a:hover {
+  color: #fff;
+}
+
 a,
 button {
   transition: all ease-in-out;
@@ -264,15 +269,11 @@ button.list-group-item:hover .list-group-item-heading {
 }
 
 .comment-div {
-  padding: 5px;
-  margin: 0px;
-  border-width: 2px;
-  border-top-width: 0px;
-  border-style: solid;
-  border-top-style: none;
-  border-color: #d9d9d9;
-  border-top-color: none;
-  background-color: #ebf0fa;
+  padding: 10px 15px;
+  margin: 10px 15px;
+  background: none;
+  border: 1px solid rgba(0, 0, 0, 0.8);
+  border-radius: 12px;
 }
 
 .comment-div p {
@@ -317,10 +318,40 @@ button.list-group-item:hover .list-group-item-heading {
 
 .panel-body {
   background: none;
+  color: #fff;
 }
 
 .well {
   border: none;
+}
+
+.well h5 {
+  font-size: 22px;
+}
+
+.error-text {
+  color: red;
+  font-size: 18px;
+}
+
+.quiz-background {
+  background-size: cover;
+  background-position: center center;
+}
+
+.correct-bg {
+  background: rgba(39, 124, 98, 1);
+}
+
+.wrong-bg {
+  background: rgba(175, 56, 68, 1);
+}
+
+.comment-form textarea {
+  margin-top: 10px;
+  border-radius: 12px;
+  padding: 10px 15px;
+  background: rgba(255, 255, 255, 0.7);
 }
 
 
