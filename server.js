@@ -21,6 +21,7 @@ var adminController = require('./controllers/adminController');
 // Create app
 var app = express();
 var PORT = process.env.PORT || 3000;
+var server_host = process.env.YOUR_HOST || '0.0.0.0';
 
 // Set up view w. Handlebars
 app.engine('handlebars', exphbs({ defaultLayout: 'main' }));
@@ -65,7 +66,7 @@ app.use('/admin', adminController);
 
 // Create Server
 Models.sequelize.sync({ force: false }).then(function() {
-  app.listen(PORT, function() {
+  app.listen(PORT, server_host, function() {
     console.log(`Listening on PORT: ${PORT}`);
   });
 });
