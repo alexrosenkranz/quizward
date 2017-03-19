@@ -14,7 +14,10 @@
     "dialect": "mysql"
   },
   "production": {
-    "use_env_variable": "JAWSDB_URL",
+    "username": "db46902_quizward",
+    "password": "Quizward1!",
+    "database": "test",
+    "host": "external-db.s46902.gridserver.com",
     "dialect": "mysql"
   }
 }
