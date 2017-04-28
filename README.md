@@ -68,8 +68,3 @@ Let **_Quizward_** keep track of all things "quiz" in your life.
 $ npm start
 ```
 
-### To enter test data in the db:
-```shell
-$ npm run test-db
-```
-
